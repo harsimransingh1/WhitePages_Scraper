@@ -127,7 +127,14 @@ Public Class frmScrapeWeb
         End Try
     End Sub
 
+    Dim cnt As Double = 0
     Public Sub extractNextURL()
+        cnt += 1
+        If cnt Mod 50 = 0 Then
+            t.Stop()
+            Thread.Sleep(30000)
+            t.Start()
+        End If
         Dim txt As String = wb.Document.Body.InnerHtml
 
         Dim id As Guid = Guid.NewGuid
@@ -157,4 +164,5 @@ Public Class frmScrapeWeb
 
         wb.Navigate(url)
     End Sub
+
 End Class
